@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import RechartsGraph from '@/components/RechartsGraph';
 import Alerts from '@/components/Alerts';
+import OptimizationPanel from '@/components/OptimizationPanel';
 import { getDummySensorData, DummySensorData } from '@/lib/sim';
 
 export default function Dashboard() {
@@ -27,10 +28,33 @@ export default function Dashboard() {
     setO2Data(initialO2);
     setTempData(initialTemp);
 
-    // Update data every 2 seconds
-    const interval = setInterval(() => {
+    // Update data every 2 seconds and send to API
+    const interval = setInterval(async () => {
       const newData = getDummySensorData();
       setCurrentData(newData);
+      
+      // Send data to API for optimization analysis
+      try {
+        await fetch('/api/ingest', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-API-Key': 'demo-api-key', // In production, use real API key
+          },
+          body: JSON.stringify({
+            gateway_id: 'demo-gateway',
+            timestamp: newData.timestamp,
+            sensors: [
+              { id: 'energy-001', type: 'energy', value: newData.energy, unit: 'kWh' },
+              { id: 'flow-001', type: 'flow', value: newData.flow, unit: 'm3/h' },
+              { id: 'o2-001', type: 'oxygen', value: newData.o2, unit: '%' },
+              { id: 'temp-001', type: 'temperature', value: newData.temp, unit: '°C' },
+            ],
+          }),
+        });
+      } catch (error) {
+        console.error('Error sending sensor data:', error);
+      }
       
       const now = Date.now();
       const oneHourAgo = now - 60 * 60 * 1000;
@@ -145,6 +169,11 @@ export default function Dashboard() {
             unit="°C"
             color="#f59e0b"
           />
+        </div>
+
+        {/* Optimization Panel */}
+        <div className="mb-8">
+          <OptimizationPanel />
         </div>
 
         {/* Alerts */}

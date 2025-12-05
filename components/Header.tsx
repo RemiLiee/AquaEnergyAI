@@ -20,6 +20,9 @@ export default function Header() {
             <Link href="/dashboard" className="text-gray-700 hover:text-primary-600 transition-colors">
               Dashboard
             </Link>
+            <Link href="/savings" className="text-gray-700 hover:text-primary-600 transition-colors">
+              Besparelser
+            </Link>
             <Link href="/#products" className="text-gray-700 hover:text-primary-600 transition-colors">
               Produkter
             </Link>

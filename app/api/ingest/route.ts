@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { database } from '@/lib/database';
+import { optimizationEngine } from '@/lib/optimization';
 
 interface SensorReading {
   id: string;
@@ -25,27 +27,89 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log the incoming data (in production, this would be stored in a database)
-    console.log('Sensor data ingested:', {
-      gateway_id: body.gateway_id,
-      timestamp: body.timestamp,
-      sensor_count: body.sensors.length,
-      sensors: body.sensors,
-    });
+    // Validate API key (in production, check against database)
+    const apiKey = request.headers.get('X-API-Key');
+    if (!apiKey) {
+      return NextResponse.json(
+        { error: 'API key required. Include X-API-Key header.' },
+        { status: 401 }
+      );
+    }
 
-    // In a real app, you would:
-    // 1. Validate API key from headers
-    // 2. Store data in database
-    // 3. Process alerts based on sensor values
-    // 4. Trigger notifications if needed
-    // 5. Update analytics
+    const timestamp = typeof body.timestamp === 'string' ? parseInt(body.timestamp) : body.timestamp;
+
+    // Store each sensor reading in database
+    const savedReadings = [];
+    for (const sensor of body.sensors) {
+      const reading = {
+        id: `${body.gateway_id}-${sensor.id}-${timestamp}`,
+        gateway_id: body.gateway_id,
+        sensor_id: sensor.id,
+        sensor_type: sensor.type as any,
+        value: sensor.value,
+        unit: sensor.unit,
+        timestamp: timestamp,
+      };
+      
+      await database.saveSensorReading(reading);
+      savedReadings.push(reading);
+    }
+
+    // Process data for optimization and alerts
+    const sensorData = {
+      timestamp,
+      energy: savedReadings.find(r => r.sensor_type === 'energy')?.value || 0,
+      flow: savedReadings.find(r => r.sensor_type === 'flow')?.value || 0,
+      oxygen: savedReadings.find(r => r.sensor_type === 'oxygen')?.value || 0,
+      temperature: savedReadings.find(r => r.sensor_type === 'temperature')?.value || 0,
+    };
+
+    // Get historical data for analysis
+    const historical = await database.getSensorReadings(body.gateway_id, timestamp - 24 * 60 * 60 * 1000, timestamp);
+    const historicalData = historical.map(r => ({
+      timestamp: r.timestamp,
+      energy: r.sensor_type === 'energy' ? r.value : 0,
+      flow: r.sensor_type === 'flow' ? r.value : 0,
+      oxygen: r.sensor_type === 'oxygen' ? r.value : 0,
+      temperature: r.sensor_type === 'temperature' ? r.value : 0,
+    }));
+
+    // Run optimization analysis
+    const analysis = optimizationEngine.analyzeEnergyConsumption([...historicalData, sensorData]);
+    const recommendations = optimizationEngine.generateRecommendations(sensorData, historicalData);
+
+    // Save recommendations as alerts if high priority
+    for (const rec of recommendations.filter(r => r.priority === 'high')) {
+      await database.saveAlert({
+        id: `alert-${timestamp}-${rec.id}`,
+        type: rec.type === 'maintenance' ? 'warning' : 'info',
+        message: rec.title + ': ' + rec.description,
+        sensor_type: rec.type,
+        timestamp,
+        resolved: false,
+      });
+    }
+
+    // Log successful ingestion
+    console.log('Sensor data ingested and processed:', {
+      gateway_id: body.gateway_id,
+      timestamp,
+      sensors_received: body.sensors.length,
+      potential_savings: analysis.potentialSavings.toFixed(1) + '%',
+      savings_amount: analysis.savingsAmount.toFixed(0) + ' NOK/mnd',
+    });
 
     return NextResponse.json({
       status: 'ok',
-      message: 'Data ingested successfully',
+      message: 'Data ingested and analyzed successfully',
       gateway_id: body.gateway_id,
       timestamp: Date.now(),
       sensors_received: body.sensors.length,
+      analysis: {
+        potentialSavings: analysis.potentialSavings,
+        savingsAmount: analysis.savingsAmount,
+        recommendationsCount: recommendations.length,
+      },
     });
   } catch (error) {
     console.error('Error ingesting sensor data:', error);
@@ -58,13 +122,12 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   // Return mock data for testing
-  const mockData = sensorSimulator.generateSensorData();
-  const alerts = sensorSimulator.checkAlerts(mockData);
+  const { getDummySensorData } = await import('@/lib/sim');
+  const mockData = getDummySensorData();
 
   return NextResponse.json({
     success: true,
     data: mockData,
-    alerts: alerts,
     message: 'Mock sensor data generated',
   });
 }
