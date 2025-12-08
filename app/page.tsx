@@ -46,15 +46,16 @@ export default function Home() {
       />
       
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-primary-50 via-white to-primary-50 py-20 md:py-32 lg:py-40 overflow-hidden">
+      <section className="relative bg-white py-20 md:py-32 lg:py-40 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1920"
-            alt="Akvakultur anlegg"
+            alt="Akvakultur anlegg med bølger"
             fill
-            className="object-cover opacity-5"
+            className="object-cover"
             priority
           />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/90"></div>
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
