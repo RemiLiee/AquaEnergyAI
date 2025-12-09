@@ -33,9 +33,6 @@ export default function Header() {
             <Link href="/savings" className="text-gray-700 hover:text-primary-600 transition-colors">
               Besparelser
             </Link>
-            <Link href="/installasjon" className="text-gray-700 hover:text-primary-600 transition-colors">
-              Installasjon
-            </Link>
             <Link href="/#products" className="text-gray-700 hover:text-primary-600 transition-colors">
               Produkter
             </Link>
