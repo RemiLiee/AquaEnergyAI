@@ -46,13 +46,31 @@ export default function Home() {
       />
       
       {/* Hero Section - med bølgebilde */}
-      <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden min-h-[70vh] w-full">
-        <div className="absolute inset-0 z-0 w-full h-full">
+      <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden min-h-[70vh] w-full" style={{ position: 'relative' }}>
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{ 
+            zIndex: 0,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0
+          }}
+        >
           <img
             src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1920"
             alt="Akvakultur anlegg med bølger"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ zIndex: 0 }}
+            className="w-full h-full object-cover"
+            style={{ 
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              zIndex: 0
+            }}
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
