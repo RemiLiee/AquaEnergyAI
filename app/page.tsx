@@ -5,7 +5,7 @@ import ContactForm from '@/components/ContactForm';
 import ROIChart from '@/components/ROIChart';
 
 export default function Home() {
-  const structuredData = {
+  const structuredData = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "AquaEnergy AI",
@@ -36,13 +36,13 @@ export default function Home() {
         "description": "Industriell energimåler, Industrial clamp-on flow, Optisk DO, 2x IP68 PT100, 2x vibrasjonssensor"
       }
     ]
-  };
+  });
 
   return (
     <div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: structuredData }}
       />
       
       {/* Hero Section - med bølgebilde */}
@@ -62,17 +62,25 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}>
-              Ta kontroll over anlegget ditt – på 1, 2, 3
+              AI-drevet energistyring for havbruk
             </h1>
             <p className="text-xl sm:text-2xl text-white mb-10 max-w-3xl mx-auto font-medium leading-relaxed" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.3)' }}>
               Sammen med anleggseier blir vi enige om tiltak og etter hvert som disse iverksettes, vises forbedringene i dashboardet. Slik får du som anleggseier full kontroll over anlegget og dets energibruk og drift. Resultatet er som regel betydelige energibesparelser.
             </p>
-            <Link
-              href="#contact"
-              className="inline-block bg-primary-600 text-white px-10 py-5 rounded-lg font-bold hover:bg-primary-700 transition-colors text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1"
-            >
-              Analyser ditt anlegg
-            </Link>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link
+                href="#contact"
+                className="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors text-lg shadow-lg"
+              >
+                Book gratis pilot
+              </Link>
+              <Link
+                href="/dashboard"
+                className="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold border-2 border-primary-500 hover:bg-primary-700 transition-colors text-lg shadow-lg"
+              >
+                Se demo-dashboard
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -151,12 +159,13 @@ export default function Home() {
                 Learn More →
               </Link>
             </div>
-            <div className="relative h-96 rounded-xl overflow-hidden shadow-2xl">
+            <div className="section-image relative h-96">
               <Image
-                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200"
-                alt="AquaEnergy Dashboard"
+                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1920"
+                alt="Industriell pumpesystem installasjon"
                 fill
                 className="object-cover"
+                style={{ opacity: 1, filter: 'none' }}
               />
             </div>
           </div>
@@ -197,31 +206,33 @@ export default function Home() {
           
           {/* Product Images - med bilder av produkter i hardt vær */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto">
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-2xl group">
+            <div className="section-image relative h-80 group">
               <Image
-                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1200"
-                alt="Plug & Play sensorpakke i hardt vær på oppdrettsanlegg"
+                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1920"
+                alt="Fiskeoppdrettsanlegg"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
+                style={{ opacity: 1, filter: 'none' }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent flex items-end p-8">
+              <div className="absolute inset-0 flex items-end p-8 z-10">
                 <div>
-                  <h3 className="text-white text-3xl font-bold mb-2 drop-shadow-2xl">Plug & Play</h3>
-                  <p className="text-white/90 text-lg">Robust og pålitelig i alle værforhold</p>
+                  <h3 className="text-white text-3xl font-bold mb-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>Plug & Play</h3>
+                  <p className="text-white text-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Robust og pålitelig i alle værforhold</p>
                 </div>
               </div>
             </div>
-            <div className="relative h-80 rounded-xl overflow-hidden shadow-2xl group">
+            <div className="section-image relative h-80 group">
               <Image
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200"
-                alt="Sjøklar industriell sensorpakke i storm på oppdrettsanlegg"
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920"
+                alt="Fiskeoppdrettsanlegg nærbilde"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
+                style={{ opacity: 1, filter: 'none' }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-primary-600/50 to-transparent flex items-end p-8">
+              <div className="absolute inset-0 flex items-end p-8 z-10">
                 <div>
-                  <h3 className="text-white text-3xl font-bold mb-2 drop-shadow-2xl">Sjøklar</h3>
-                  <p className="text-white/90 text-lg">Industriell styrke for ekstreme forhold</p>
+                  <h3 className="text-white text-3xl font-bold mb-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>Sjøklar</h3>
+                  <p className="text-white text-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Industriell styrke for ekstreme forhold</p>
                 </div>
               </div>
             </div>
@@ -260,62 +271,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Kundecaser Section - ligner Energy Control */}
+      {/* Hva man kan forvente Section */}
       <section className="py-16 md:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Hva folk har å si om oss
+              Hva man kan forvente med AquaEnergy AI
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-primary-600 mb-2">22%</div>
-              <div className="text-gray-600 mb-4">energireduksjon</div>
-              <p className="text-gray-700 mb-4 italic">
-                "Sensorene har levert hundre prosent av tiden, uten noe som helst nedetid. Vi er derfor veldig fornøyde med resultatene."
+              <h3 className="text-xl font-bold text-primary-600 mb-4">Stabil overvåkning</h3>
+              <p className="text-gray-700 italic">
+                "Sensorene gir kontinuerlig innsikt i pumpenes drift, slik at man får bedre kontroll på energibruken uten manuell oppfølging."
               </p>
-              <div className="text-sm font-semibold text-gray-900">— Anleggseier, Møre og Romsdal</div>
             </div>
             <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-primary-600 mb-2">2 år</div>
-              <div className="text-gray-600 mb-4">nedbetalingstid</div>
-              <p className="text-gray-700 mb-4 italic">
-                "Vi trodde det ville ta mellom fem og seks år, men investering var lav og løsningen har fungert så godt at det hele faktisk var nedbetalt på under to år."
+              <h3 className="text-xl font-bold text-primary-600 mb-4">Rask igangkjøring</h3>
+              <p className="text-gray-700 italic">
+                "Systemet er enkelt å sette opp, og kan tas i bruk samme dag."
               </p>
-              <div className="text-sm font-semibold text-gray-900">— Anleggseier, Nordland</div>
             </div>
             <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-primary-600 mb-2">25%</div>
-              <div className="text-gray-600 mb-4">energireduksjon</div>
-              <p className="text-gray-700 mb-4 italic">
-                "Ved hjelp av AquaEnergy Dashboard har vi styrt pådraget til pumpene basert på faktisk behov. Dette enkle grepet har ført til en umiddelbar reduksjon i energibruken på 25%."
+              <h3 className="text-xl font-bold text-primary-600 mb-4">Smartere drift med Dashboard</h3>
+              <p className="text-gray-700 italic">
+                "Dashboardet gir full oversikt over pumpene, slik at man kan tilpasse driften etter behov og bruke energi mer effektivt."
               </p>
-              <div className="text-sm font-semibold text-gray-900">— Anleggseier, Trøndelag</div>
             </div>
             <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-primary-600 mb-2">1 dag</div>
-              <div className="text-gray-600 mb-4">installasjonstid</div>
-              <p className="text-gray-700 mb-4 italic">
-                "Da vi aktiverte sensorene og de tok over styringen av anlegget stupte energibruken umiddelbart med 30 prosent."
+              <h3 className="text-xl font-bold text-primary-600 mb-4">Samlet kontroll på ett sted</h3>
+              <p className="text-gray-700 italic">
+                "Alle enheter kan overvåkes samlet i ett system, noe som gjør det enklere å ta beslutninger for hele driften."
               </p>
-              <div className="text-sm font-semibold text-gray-900">— Anleggseier, Vestland</div>
             </div>
             <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-primary-600 mb-2">100%</div>
-              <div className="text-gray-600 mb-4">av alle anlegg er påkoblet</div>
-              <p className="text-gray-700 mb-4 italic">
-                "Det å få samlet kontroll og overvåkning av alle anleggene våre via AquaEnergy Dashboard er nøkkelrollen i energieffektiv styring av våre anlegg."
+              <h3 className="text-xl font-bold text-primary-600 mb-4">Mulighet for kostnadsbesparelser</h3>
+              <p className="text-gray-700 italic">
+                "Ved å følge med på energiforbruket og justere pumpene etter behov, kan man redusere unødvendig bruk og spare penger."
               </p>
-              <div className="text-sm font-semibold text-gray-900">— Anleggseier, Troms</div>
-            </div>
-            <div className="bg-white rounded-xl p-8 shadow-lg">
-              <div className="text-4xl font-bold text-primary-600 mb-2">40%</div>
-              <div className="text-gray-600 mb-4">reduksjon i energikostnader</div>
-              <p className="text-gray-700 mb-4 italic">
-                "Endelig har vi fått samlet alle anlegg og systemer i et lekende lett Dashboard!"
-              </p>
-              <div className="text-sm font-semibold text-gray-900">— Anleggseier, Finnmark</div>
             </div>
           </div>
         </div>

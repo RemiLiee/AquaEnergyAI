@@ -4,8 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Chatbot from "@/components/Chatbot";
 import CookieBanner from "@/components/CookieBanner";
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import AnalyticsWrapper from "@/components/AnalyticsWrapper";
 import Script from 'next/script';
 
 export const metadata: Metadata = {
@@ -103,8 +102,7 @@ export default function RootLayout({
         <Footer />
         <Chatbot />
         <CookieBanner />
-        <Analytics />
-        <SpeedInsights />
+        <AnalyticsWrapper />
       </body>
     </html>
   );

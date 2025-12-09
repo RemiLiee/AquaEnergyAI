@@ -1,0 +1,25 @@
+[33m53b6f7a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Fjern hvit bakgrunn fra hovedcontainer for å vise bølgebildet tydelig
+[33m9c8b65e[m Forbedre bølgebilde-visning med min-høyde og optimalisert bildeinnlasting
+[33md78e3c2[m Legg til Google Analytics og forbedre bølgebilde-visning
+[33m2de1e2d[m Gjør bølgebildet helt klart ved å fjerne hvit overlay og forbedre bildekvalitet
+[33mbbed6cc[m Legg til cookie-banner for GDPR-compliance og oppdater Google Analytics consent mode
+[33m1b640be[m Legg til Vercel Analytics og Google Analytics support
+[33mc8f120b[m Oppdater hjemmeside til å ligne Energy Control med bølgebilde og produktbilder
+[33ma3f9e12[m Gjenopprett original versjon fra commit a80cc1b
+[33ma278dcb[m Gjenopprett original versjon før alle tekstendringer
+[33m391071a[m Gjenopprett original versjon av page.tsx før tekstendringer
+[33mb1bc249[m Tilbake til original versjon før tekstendringer
+[33m7a70e66[m Fjern hvit overlay helt for å vise bølgebildet fullt
+[33mac8dcb7[m Reduser hvit overlay for å gjøre bølgebildet mer synlig
+[33m7344db2[m Tilbake til original CTA-seksjon med 'Book gratis pilot'
+[33mf7de196[m Endre fra '30 dager gratis' til 'pilot kunder'
+[33m21ea777[m Legg tilbake bølgebilde i hero-seksjonen
+[33m99a1006[m Oppdater e-post sending til remi_lie98@me.com
+[33m9ad63bc[m Fiks Resend API: replyTo -> reply_to
+[33me6e68b7[m Oppdater hjemmeside med ny struktur og forbedret innhold
+[33ma403a82[m Legg til e-post funksjonalitet med Resend API
+[33ma80cc1b[m Fiks Next.js 14 async params i API-rute
+[33m1500a9d[m Legg til installasjonsmanual, API-endpoints, og forbedringer
+[33meaa5aa3[m Add AI optimization engine, predictive maintenance, control system, and savings reporting
+[33m54300da[m Full AquaEnergy AI website with landing page, dashboard, API, and all features
+[33m872e935[m Initial commit
