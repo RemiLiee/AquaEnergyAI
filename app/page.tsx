@@ -46,14 +46,15 @@ export default function Home() {
       />
       
       {/* Hero Section - med bølgebilde */}
-      <section className="relative bg-white py-20 md:py-32 lg:py-40 overflow-hidden">
+      <section className="relative py-20 md:py-32 lg:py-40 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1920"
+            src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=100&w=1920&auto=format&fit=crop"
             alt="Akvakultur anlegg med bølger"
             fill
-            className="object-cover"
+            className="object-cover brightness-100"
             priority
+            quality={100}
           />
         </div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
