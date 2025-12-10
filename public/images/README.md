@@ -21,3 +21,8 @@ The website currently uses Unsplash URLs as placeholders. Replace these with loc
 to:
 - `/images/fishfarm-1.jpg` (or appropriate filename)
 
+
+
+
+
+

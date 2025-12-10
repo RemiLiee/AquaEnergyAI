@@ -5,3 +5,8 @@ git commit -m "Fjern bg-white fra hero-seksjon for å vise bølgebildet"
 git push
 
 
+
+
+
+
+
