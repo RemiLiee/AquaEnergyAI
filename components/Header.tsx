@@ -7,18 +7,19 @@ export default function Header() {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-11 h-11 bg-gradient-to-br from-primary-600 via-primary-500 to-aqua-500 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all group-hover:scale-105 overflow-hidden">
+              <div className="relative w-11 h-11 bg-gradient-to-br from-blue-600 via-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all group-hover:scale-105 overflow-hidden">
                 <svg className="w-7 h-7 text-white relative z-10" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                  {/* Bølger nederst */}
-                  <path d="M2 20c2-1 4-1 6 0s4 1 6 0 4-1 6 0" strokeLinecap="round"/>
-                  <path d="M2 16c2-1 4-1 6 0s4 1 6 0 4-1 6 0" strokeLinecap="round" opacity="0.7"/>
-                  {/* Energi-bolt */}
-                  <path d="M13 2L3 14h6l-2 8 10-12h-6l2-8z" fill="currentColor" stroke="none"/>
+                  {/* Industriel gear/tannhjul */}
+                  <path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="currentColor" stroke="none"/>
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                  {/* Sensor/radar linjer */}
+                  <path d="M12 2V6M12 18V22M2 12H6M18 12H22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  <path d="M5.64 5.64L8.46 8.46M15.54 15.54L18.36 18.36M5.64 18.36L8.46 15.54M15.54 8.46L18.36 5.64" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
                 </svg>
                 <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-xl"></div>
               </div>
               <div className="flex flex-col">
-                <span className="text-xl font-bold text-gray-900 leading-tight group-hover:text-primary-600 transition-colors">AquaEnergy</span>
+                <span className="text-xl font-bold text-gray-900 leading-tight group-hover:text-primary-600 transition-colors">Blusense</span>
                 <span className="text-xs text-primary-600 font-semibold leading-tight">AI</span>
               </div>
             </Link>

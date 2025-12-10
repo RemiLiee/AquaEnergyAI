@@ -8,16 +8,16 @@ import AnalyticsWrapper from "@/components/AnalyticsWrapper";
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://aquaenergyai.com'),
+  metadataBase: new URL('https://blusense.com'),
   title: {
-    default: "AquaEnergy AI — AI-drevet energistyring",
-    template: "%s | AquaEnergy AI"
+    default: "Blusense AI — AI-drevet energistyring",
+    template: "%s | Blusense AI"
   },
   description: "Plug & Play sensorpakker + AI for energibesparelse. Sanntids overvåking og optimalisering for industrianlegg. Reduser strømforbruk med 10-30%.",
   keywords: ["energibesparelse", "sensorovervåkning", "AI", "energistyring", "energioptimalisering", "IoT sensorer", "prediktivt vedlikehold", "pumpestyring", "industrianlegg", "energimåling"],
-  authors: [{ name: "AquaEnergy AI" }],
-  creator: "AquaEnergy AI",
-  publisher: "AquaEnergy AI",
+  authors: [{ name: "Blusense AI" }],
+  creator: "Blusense AI",
+  publisher: "Blusense AI",
   robots: {
     index: true,
     follow: true,
@@ -32,27 +32,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "no_NO",
-    url: "https://aquaenergyai.com",
-    siteName: "AquaEnergy AI",
-    title: "AquaEnergy AI — AI-drevet energistyring",
+    url: "https://blusense.com",
+    siteName: "Blusense AI",
+    title: "Blusense AI — AI-drevet energistyring",
     description: "Plug & Play sensorpakker + AI for energibesparelse. Reduser strømforbruk med 10-30% i industrianlegg.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "AquaEnergy AI - AI-drevet energistyring",
+        alt: "Blusense AI - AI-drevet energistyring",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AquaEnergy AI — AI-drevet energistyring",
+    title: "Blusense AI — AI-drevet energistyring",
     description: "Plug & Play sensorpakker + AI for energibesparelse. Reduser strømforbruk med 10-30%.",
     images: ["/og-image.png"],
   },
   alternates: {
-    canonical: "https://aquaenergyai.com",
+    canonical: "https://blusense.com",
   },
   verification: {
     // Legg til Google Search Console verification code her når du har det

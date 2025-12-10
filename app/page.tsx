@@ -8,15 +8,15 @@ export default function Home() {
   const structuredData = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "AquaEnergy AI",
-    "url": "https://aquaenergyai.com",
-    "logo": "https://aquaenergyai.com/logo.png",
+    "name": "Blusense AI",
+    "url": "https://blusense.com",
+    "logo": "https://blusense.com/logo.png",
     "description": "Plug & Play sensorpakker + AI for energibesparelse i industrianlegg",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+47-900-24-636",
       "contactType": "customer service",
-      "email": "post@aquaenergyai.com",
+      "email": "post@blusense.com",
       "areaServed": "NO",
       "availableLanguage": "Norwegian"
     },
@@ -30,7 +30,7 @@ export default function Home() {
       },
       {
         "@type": "Offer",
-        "name": "Sjøklar — Industri-pakke",
+        "name": "Industri Pro -pakke",
         "price": "55000",
         "priceCurrency": "NOK",
         "description": "Industriell energimåler, Industrial clamp-on flow, Optisk DO, 2x IP68 PT100, 2x vibrasjonssensor"
@@ -138,7 +138,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              AquaEnergy Dashboard
+              Blusense Dashboard
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Innsikt i ditt anlegg
@@ -163,8 +163,8 @@ export default function Home() {
             </div>
             <div className="section-image relative h-96">
               <Image
-                src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1920"
-                alt="Industriell pumpesystem installasjon"
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1920"
+                alt="AI-drevet optimalisering med dataanalyse, grafer og anbefalinger"
                 fill
                 className="object-cover"
                 style={{ opacity: 1, filter: 'none' }}
@@ -210,8 +210,8 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 max-w-5xl mx-auto">
             <div className="section-image relative h-80 group">
               <Image
-                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?q=80&w=1920"
-                alt="Industrielt anlegg"
+                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1920"
+                alt="Sensorpakke med dashboard og overvåking"
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
                 style={{ opacity: 1, filter: 'none' }}
@@ -219,24 +219,69 @@ export default function Home() {
               <div className="absolute inset-0 flex items-end p-8 z-10">
                 <div>
                   <h3 className="text-white text-3xl font-bold mb-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>Plug & Play</h3>
-                  <p className="text-white text-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Robust og pålitelig i alle værforhold</p>
+                  <p className="text-white text-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Komplett pakke med eget dashboard</p>
                 </div>
               </div>
             </div>
             <div className="section-image relative h-80 group">
-              <Image
-                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1920"
-                alt="Industrielt anlegg nærbilde"
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-                style={{ opacity: 1, filter: 'none' }}
-              />
-              <div className="absolute inset-0 flex items-end p-8 z-10">
-                <div>
-                  <h3 className="text-white text-3xl font-bold mb-2" style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.5)' }}>Sjøklar</h3>
-                  <p className="text-white text-lg" style={{ textShadow: '1px 1px 3px rgba(0,0,0,0.5)' }}>Industriell styrke for ekstreme forhold</p>
+              <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
+                {/* Sensorpakke */}
+                <div className="bg-white/95 backdrop-blur-sm rounded-lg p-4 shadow-lg max-w-md">
+                  <h3 className="text-gray-900 text-xl font-bold mb-3">Industri Pro -pakke</h3>
+                  <p className="text-gray-700 text-sm mb-3">Industriell styrke for ekstreme forhold</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="bg-blue-50 p-2 rounded border border-blue-200">
+                      <div className="flex items-center gap-1 mb-1">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-xs font-medium text-gray-700">Temp</span>
+                      </div>
+                      <div className="text-sm font-bold text-blue-600">22°C</div>
+                    </div>
+                    <div className="bg-green-50 p-2 rounded border border-green-200">
+                      <div className="flex items-center gap-1 mb-1">
+                        <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                        <span className="text-xs font-medium text-gray-700">Flow</span>
+                      </div>
+                      <div className="text-sm font-bold text-green-600">450L</div>
+                    </div>
+                    <div className="bg-purple-50 p-2 rounded border border-purple-200">
+                      <div className="flex items-center gap-1 mb-1">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                        <span className="text-xs font-medium text-gray-700">DO</span>
+                      </div>
+                      <div className="text-sm font-bold text-purple-600">8.2</div>
+                    </div>
+                    <div className="bg-yellow-50 p-2 rounded border border-yellow-200">
+                      <div className="flex items-center gap-1 mb-1">
+                        <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                        <span className="text-xs font-medium text-gray-700">Vib</span>
+                      </div>
+                      <div className="text-sm font-bold text-yellow-600">OK</div>
+                    </div>
+                    <div className="bg-red-50 p-2 rounded border border-red-200">
+                      <div className="flex items-center gap-1 mb-1">
+                        <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                        <span className="text-xs font-medium text-gray-700">IP68</span>
+                      </div>
+                      <div className="text-sm font-bold text-red-600">2x</div>
+                    </div>
+                    <div className="bg-indigo-50 p-2 rounded border border-indigo-200">
+                      <div className="flex items-center gap-1 mb-1">
+                        <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
+                        <span className="text-xs font-medium text-gray-700">GW</span>
+                      </div>
+                      <div className="text-sm font-bold text-indigo-600">4G</div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <Image
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1920"
+                alt="Produksjonsanlegg inne"
+                fill
+                className="object-cover group-hover:scale-110 transition-transform duration-500"
+                style={{ opacity: 0.3, filter: 'none' }}
+              />
             </div>
           </div>
 
@@ -255,7 +300,7 @@ export default function Home() {
               installTime="1–4 timer"
             />
             <ProductPackageCard
-              name="Sjøklar — Industri-pakke"
+              name="Industri Pro -pakke"
               sensors={[
                 'Industriell energimåler (MID/Modbus)',
                 'Industrial clamp-on flow',
@@ -278,7 +323,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Hva man kan forvente med AquaEnergy AI
+              Hva man kan forvente med Blusense AI
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -316,17 +361,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Hvorfor velge AquaEnergy AI - VS Section */}
+      {/* Hvorfor velge Blusense AI - VS Section */}
       <section className="py-16 md:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-              Hvorfor velge AquaEnergy AI?
+              Hvorfor velge Blusense AI?
             </h2>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <div className="bg-green-50 rounded-xl p-8 border-2 border-green-200">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">AquaEnergy AI</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Blusense AI</h3>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <svg className="w-6 h-6 text-green-600 mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -418,7 +463,7 @@ export default function Home() {
             Klar til å starte?
           </h2>
           <p className="text-xl text-primary-100 mb-8">
-            Book en gratis pilot og se hvordan AquaEnergy AI kan optimalisere ditt anlegg
+            Book en gratis pilot og se hvordan Blusense AI kan optimalisere ditt anlegg
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
