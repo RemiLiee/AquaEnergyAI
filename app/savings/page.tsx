@@ -1,5 +1,16 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import ROIChart from '@/components/ROIChart';
+
+export const metadata: Metadata = {
+  title: 'Energibesparelser',
+  description: 'Reduser energiforbruket med 10-30% gjennom intelligent overvåkning og optimalisering med Blusense AI. Beregn potensielle besparelser for ditt industrianlegg.',
+  keywords: ['energibesparelse', 'energireduksjon', 'ROI', 'energikostnader', 'industrianlegg', 'energioptimalisering'],
+  openGraph: {
+    title: 'Energibesparelser med Blusense AI',
+    description: 'Reduser energiforbruket med 10-30% gjennom intelligent overvåkning og optimalisering',
+  },
+};
 
 export default function SavingsPage() {
   return (
