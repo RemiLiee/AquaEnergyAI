@@ -17,10 +17,11 @@ export interface Alert {
 }
 
 class SensorSimulator {
-  private baseEnergy = 15.5;
-  private baseFlow = 120;
-  private baseOxygen = 8.2;
-  private baseTemperature = 18.5;
+  // Realistic values that will trigger recommendations
+  private baseEnergy = 220; // Higher to show optimization potential
+  private baseFlow = 35; // Higher than optimal (30) to trigger recommendations
+  private baseOxygen = 95; // Higher than optimal (90) to show savings potential
+  private baseTemperature = 12.5; // Slightly higher than optimal (11)
 
   private generateRandomValue(base: number, variance: number): number {
     return base + (Math.random() - 0.5) * variance;
