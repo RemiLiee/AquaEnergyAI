@@ -68,10 +68,17 @@ export async function GET(request: NextRequest) {
     
     // If no savings data, generate fake demo data
     if (savingsHistory.length === 0) {
-      savingsHistory = Array.from({ length: 7 }, (_, i) => ({
-        date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toISOString(),
-        savings: 1500 + Math.random() * 500,
-      }));
+      savingsHistory = Array.from({ length: 7 }, (_, i) => {
+        const baseConsumption = 220;
+        const savings = 1500 + Math.random() * 500;
+        return {
+          date: new Date(Date.now() - (6 - i) * 24 * 60 * 60 * 1000).toISOString(),
+          actualConsumption: baseConsumption + Math.random() * 20,
+          optimizedConsumption: baseConsumption * 0.75 + Math.random() * 10,
+          savings: savings / 100, // Convert to percentage
+          savingsAmount: savings,
+        };
+      });
     }
     
     if (!totalSavings || totalSavings.totalAmount === 0) {
