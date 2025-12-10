@@ -1,4 +1,4 @@
-// Dummy sensor data simulator for AquaEnergy AI
+// Dummy sensor data simulator for Blusense AI
 
 export interface SensorData {
   timestamp: number;

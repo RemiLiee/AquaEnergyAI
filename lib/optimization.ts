@@ -1,4 +1,4 @@
-// AI Optimization Engine for AquaEnergy AI
+// AI Optimization Engine for Blusense AI
 // Analyzes sensor data and provides recommendations to save energy
 
 export interface SensorData {
@@ -227,6 +227,11 @@ class OptimizationEngine {
 }
 
 export const optimizationEngine = new OptimizationEngine();
+
+
+
+
+
 
 
 
