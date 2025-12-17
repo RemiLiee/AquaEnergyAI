@@ -31,10 +31,11 @@ export default function PilotButton({ href, className, children, source = 'Unkno
         }),
       });
 
-      const data = await response.json();
       if (!response.ok) {
-        console.error('Failed to send pilot click notification:', data);
+        const errorText = await response.text();
+        console.error('Failed to send pilot click notification. Status:', response.status, 'Response:', errorText);
       } else {
+        const data = await response.json();
         console.log('Pilot click notification sent successfully:', data);
       }
     } catch (error) {
