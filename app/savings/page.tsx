@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 import ROIChart from '@/components/ROIChart';
+import PilotButton from '@/components/PilotButton';
 
 export const metadata: Metadata = {
   title: 'Energibesparelser',
@@ -97,12 +98,13 @@ export default function SavingsPage() {
                 Book en gratis pilot og se hvordan AquaEnergy AI kan redusere energiforbruket ditt
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link
+                <PilotButton
                   href="/#contact"
                   className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-lg shadow-lg"
+                  source="Savings Page"
                 >
                   Book gratis pilot
-                </Link>
+                </PilotButton>
                 <Link
                   href="/dashboard"
                   className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white/10 transition-colors text-lg"

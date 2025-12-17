@@ -10,14 +10,38 @@ export default function ContactForm() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, this would send to an API
-    console.log('Form submitted:', formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-    setFormData({ name: '', email: '', company: '', message: '' });
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Noe gikk galt');
+      }
+
+      setSubmitted(true);
+      setFormData({ name: '', email: '', company: '', message: '' });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setError(err instanceof Error ? err.message : 'Noe gikk galt. Prøv igjen.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -91,11 +115,17 @@ export default function ContactForm() {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />
           </div>
+          {error && (
+            <div className="bg-red-50 border border-red-200 text-red-800 p-4 rounded-lg">
+              {error}
+            </div>
+          )}
           <button
             type="submit"
-            className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors"
+            disabled={isLoading}
+            className="w-full bg-primary-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send melding
+            {isLoading ? 'Sender...' : 'Send melding'}
           </button>
         </form>
       )}

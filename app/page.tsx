@@ -3,6 +3,7 @@ import Image from 'next/image';
 import ProductPackageCard from '@/components/ProductPackageCard';
 import ContactForm from '@/components/ContactForm';
 import ROIChart from '@/components/ROIChart';
+import PilotButton from '@/components/PilotButton';
 
 export default function Home() {
   const structuredData = JSON.stringify({
@@ -70,12 +71,13 @@ export default function Home() {
               Sammen med anleggseier blir vi enige om tiltak og etter hvert som disse iverksettes, vises forbedringene i dashboardet. Slik får du som anleggseier full kontroll over anlegget og dets energibruk og drift. Resultatet er som regel betydelige energibesparelser.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link
+              <PilotButton
                 href="#contact"
                 className="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-primary-700 transition-colors text-lg shadow-lg"
+                source="Hero Section"
               >
                 Book gratis pilot
-              </Link>
+              </PilotButton>
               <Link
                 href="/dashboard"
                 className="bg-primary-600 text-white px-8 py-4 rounded-lg font-semibold border-2 border-primary-500 hover:bg-primary-700 transition-colors text-lg shadow-lg"
@@ -466,12 +468,13 @@ export default function Home() {
             Book en gratis pilot og se hvordan AquaEnergy AI kan optimalisere ditt anlegg
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link
+            <PilotButton
               href="#contact"
               className="bg-white text-primary-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-50 transition-colors text-lg shadow-lg"
+              source="CTA Section"
             >
               Book gratis pilot
-            </Link>
+            </PilotButton>
             <Link
               href="/dashboard"
               className="bg-transparent text-white px-8 py-4 rounded-lg font-semibold border-2 border-white hover:bg-white/10 transition-colors text-lg"
