@@ -5,6 +5,19 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if API key is set
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set');
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'RESEND_API_KEY environment variable is not configured',
+          details: 'Please set RESEND_API_KEY in Vercel environment variables'
+        },
+        { status: 500 }
+      );
+    }
+
     const body = await request.json();
     const { name, email, company, message } = body;
 
@@ -15,6 +28,10 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    const contactEmail = process.env.CONTACT_EMAIL || 'remi_lie98@me.com';
+    console.log('Sending contact form email to:', contactEmail);
+    console.log('Using API key:', process.env.RESEND_API_KEY ? 'Set (hidden)' : 'NOT SET');
 
     // Send e-post til deg med informasjonen som ble fylt ut
     const emailContent = `
@@ -37,13 +54,26 @@ AquaEnergy AI
 
     const emailResult = await resend.emails.send({
       from: 'AquaEnergy AI <onboarding@resend.dev>',
-      to: process.env.CONTACT_EMAIL || 'remi_lie98@me.com',
+      to: contactEmail,
       reply_to: email, // Så du kan svare direkte til personen
       subject: `📧 Ny kontakt fra ${name}${company ? ` (${company})` : ''}`,
       text: emailContent,
     });
 
     console.log('Contact form submission sent:', emailResult);
+    console.log('Email result data:', JSON.stringify(emailResult, null, 2));
+
+    if (emailResult.error) {
+      console.error('Resend API error:', emailResult.error);
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: 'Failed to send email',
+          details: emailResult.error.message || 'Unknown Resend API error'
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ 
       success: true, 
@@ -52,6 +82,11 @@ AquaEnergy AI
     });
   } catch (error) {
     console.error('Error sending contact form:', error);
+    console.error('Error details:', error instanceof Error ? {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    } : error);
     
     return NextResponse.json(
       { 

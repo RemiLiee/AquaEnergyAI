@@ -17,7 +17,7 @@ export default function PilotButton({ href, className, children, source = 'Unkno
     // Send e-post varsel
     setIsLoading(true);
     try {
-      await fetch('/api/pilot-click', {
+      const response = await fetch('/api/pilot-click', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -28,6 +28,13 @@ export default function PilotButton({ href, className, children, source = 'Unkno
           referer: typeof window !== 'undefined' ? window.location.href : '',
         }),
       });
+
+      const data = await response.json();
+      if (!response.ok) {
+        console.error('Failed to send pilot click notification:', data);
+      } else {
+        console.log('Pilot click notification sent successfully:', data);
+      }
     } catch (error) {
       console.error('Failed to send pilot click notification:', error);
       // Continue anyway - don't block user action
