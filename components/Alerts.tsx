@@ -8,8 +8,19 @@ interface AlertsProps {
 }
 
 export default function Alerts({ alerts }: AlertsProps) {
-  const [showAll, setShowAll] = useState(false);
-  const maxVisible = 5; // Show max 5 alerts initially
+  const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set(['error', 'warning'])); // Error og warning er åpne som standard
+
+  const toggleGroup = (type: string) => {
+    setExpandedGroups(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(type)) {
+        newSet.delete(type);
+      } else {
+        newSet.add(type);
+      }
+      return newSet;
+    });
+  };
 
   if (alerts.length === 0) {
     return (
@@ -20,14 +31,17 @@ export default function Alerts({ alerts }: AlertsProps) {
     );
   }
 
-  // Sort alerts by priority: error > warning > info
-  const sortedAlerts = [...alerts].sort((a, b) => {
-    const priority = { error: 3, warning: 2, info: 1 };
-    return priority[b.type] - priority[a.type];
-  });
+  // Group alerts by type
+  const groupedAlerts = {
+    error: alerts.filter(a => a.type === 'error'),
+    warning: alerts.filter(a => a.type === 'warning'),
+    info: alerts.filter(a => a.type === 'info'),
+  };
 
-  const visibleAlerts = showAll ? sortedAlerts : sortedAlerts.slice(0, maxVisible);
-  const hiddenCount = sortedAlerts.length - maxVisible;
+  // Sort each group by timestamp (newest first)
+  Object.keys(groupedAlerts).forEach(key => {
+    groupedAlerts[key as keyof typeof groupedAlerts].sort((a, b) => b.timestamp - a.timestamp);
+  });
 
   const getAlertColor = (type: Alert['type']) => {
     switch (type) {
@@ -65,55 +79,73 @@ export default function Alerts({ alerts }: AlertsProps) {
     }
   };
 
-  // Count by type
-  const errorCount = sortedAlerts.filter(a => a.type === 'error').length;
-  const warningCount = sortedAlerts.filter(a => a.type === 'warning').length;
-  const infoCount = sortedAlerts.filter(a => a.type === 'info').length;
+  const renderGroup = (type: 'error' | 'warning' | 'info', typeAlerts: Alert[]) => {
+    if (typeAlerts.length === 0) return null;
+
+    const isExpanded = expandedGroups.has(type);
+    const typeLabels = {
+      error: 'Kritiske varsler',
+      warning: 'Advarsler',
+      info: 'Informasjon',
+    };
+    const typeColors = {
+      error: 'text-red-800 border-red-300 bg-red-50',
+      warning: 'text-yellow-800 border-yellow-300 bg-yellow-50',
+      info: 'text-blue-800 border-blue-300 bg-blue-50',
+    };
+
+    return (
+      <div key={type} className="border rounded-lg overflow-hidden">
+        <button
+          onClick={() => toggleGroup(type)}
+          className={`w-full px-4 py-3 flex items-center justify-between font-semibold text-sm transition-colors ${typeColors[type]}`}
+        >
+          <div className="flex items-center gap-2">
+            {getAlertIcon(type)}
+            <span>{typeLabels[type]}</span>
+            <span className="text-xs font-normal opacity-75">({typeAlerts.length})</span>
+          </div>
+          <svg
+            className={`w-5 h-5 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        {isExpanded && (
+          <div className="p-2 space-y-2 max-h-64 overflow-y-auto bg-white">
+            {typeAlerts.map((alert) => (
+              <div
+                key={alert.id}
+                className={`border rounded-lg p-2.5 flex items-start space-x-2 text-sm ${getAlertColor(alert.type)}`}
+              >
+                <div className="flex-shrink-0 mt-0.5">
+                  {getAlertIcon(alert.type)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium leading-tight">{alert.message}</p>
+                  <p className="text-xs opacity-75 mt-0.5">
+                    {new Date(alert.timestamp).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' })}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="bg-white rounded-lg shadow p-4">
-      <div className="flex justify-between items-center mb-3">
-        <h2 className="text-lg font-semibold text-gray-900">Varsler</h2>
-        <div className="flex gap-2 text-xs">
-          {errorCount > 0 && <span className="bg-red-100 text-red-800 px-2 py-1 rounded">{errorCount} kritisk</span>}
-          {warningCount > 0 && <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">{warningCount} advarsel</span>}
-          {infoCount > 0 && <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">{infoCount} info</span>}
-        </div>
+      <h2 className="text-lg font-semibold text-gray-900 mb-3">Varsler</h2>
+      <div className="space-y-2">
+        {renderGroup('error', groupedAlerts.error)}
+        {renderGroup('warning', groupedAlerts.warning)}
+        {renderGroup('info', groupedAlerts.info)}
       </div>
-      <div className="space-y-2 max-h-96 overflow-y-auto">
-        {visibleAlerts.map((alert) => (
-          <div
-            key={alert.id}
-            className={`border rounded-lg p-2.5 flex items-start space-x-2 text-sm ${getAlertColor(alert.type)}`}
-          >
-            <div className="flex-shrink-0 mt-0.5">
-              {getAlertIcon(alert.type)}
-            </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium leading-tight">{alert.message}</p>
-              <p className="text-xs opacity-75 mt-0.5">
-                {new Date(alert.timestamp).toLocaleTimeString('no-NO', { hour: '2-digit', minute: '2-digit' })}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-      {hiddenCount > 0 && !showAll && (
-        <button
-          onClick={() => setShowAll(true)}
-          className="mt-3 w-full text-sm text-primary-600 hover:text-primary-700 font-medium"
-        >
-          Vis {hiddenCount} flere varsler ↓
-        </button>
-      )}
-      {showAll && sortedAlerts.length > maxVisible && (
-        <button
-          onClick={() => setShowAll(false)}
-          className="mt-3 w-full text-sm text-primary-600 hover:text-primary-700 font-medium"
-        >
-          Vis færre ↑
-        </button>
-      )}
     </div>
   );
 }
