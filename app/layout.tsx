@@ -68,8 +68,9 @@ export default function RootLayout({
   return (
     <html lang="no">
       <body className="min-h-screen flex flex-col">
-        {/* Google Analytics - Consent Mode */}
-        {(() => {
+        {/* Google Analytics - Temporarily disabled to fix JavaScript errors */}
+        {/* TODO: Re-enable after fixing GA ID in Vercel environment variables */}
+        {false && process.env.NEXT_PUBLIC_GA_ID && (() => {
           try {
             const rawGaId = process.env.NEXT_PUBLIC_GA_ID;
             if (!rawGaId) return null;
