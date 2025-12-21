@@ -43,14 +43,15 @@ export default function Graph({ title, data, dataKey, unit, color = 'primary' }:
           {currentValue.toFixed(dataKey === 'temperature' ? 1 : 2)} {unit}
         </div>
       </div>
-      <div className="h-48 flex items-end space-x-1">
+      <div className="h-48 flex items-end space-x-1 bg-gray-100 rounded p-1">
         {values.map((value, index) => {
           const height = ((value - min) / range) * 100;
+          const barHeight = Math.max(height, 5);
           return (
             <div
               key={index}
-              className={`flex-1 ${colorClasses[color as keyof typeof colorClasses] || colorClasses.primary} rounded-t opacity-70 hover:opacity-100 transition-opacity`}
-              style={{ height: `${Math.max(height, 5)}%` }}
+              className={`flex-1 ${colorClasses[color as keyof typeof colorClasses] || colorClasses.primary} rounded-t opacity-80 hover:opacity-100 transition-opacity`}
+              style={{ height: `${barHeight}%`, minHeight: '4px' }}
               title={`${value.toFixed(2)} ${unit}`}
             />
           );
